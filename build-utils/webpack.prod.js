@@ -1,10 +1,14 @@
 const Dotenv = require('dotenv-webpack');
 module.exports = {
-  mode: 'development',
-  devtool: 'eval-source-map',
+  mode: 'production',
+  devtool: 'source-map',
   plugins: [
     new Dotenv({
       path: './.env.production',
-    })
+    }),
   ],
+  devServer: {
+    contentBase: './dist',
+    historyApiFallback: true,
+  },
 };

@@ -2,13 +2,14 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Router } from '@reach/router';
 import NavBar from '../Nav/NavBar';
-import Welcome from '../Welcome/Welcome';
+import Home from '../Home/Home';
 import Signin from '../Auth/Signin';
 import Signup from '../Auth/Signup';
 
 const useStyles = makeStyles({
   root: {
     margin: -8,
+    height: '100vh',
   },
 });
 
@@ -18,7 +19,7 @@ function App() {
     <div className={classes.root}>
       <NavBar />
       <Router>
-        <Welcome path="/" />
+        <Home path="/" />
         <Signin path="/signin" />
         <Signup path="/signup" />
       </Router>
