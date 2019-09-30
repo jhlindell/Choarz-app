@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './createStore';
 
-import App from './App';
+import App from './App/App';
 
-const title = 'Choarz';
 ReactDOM.render(
-  <App title={title} />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('app'),
 );
-
-module.hot.accept();
