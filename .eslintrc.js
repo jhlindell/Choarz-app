@@ -23,7 +23,7 @@ module.exports = {
       2,
       { extensions: ['.js', '.jsx'] },
     ],
-    'react/jsx-curly-spacing': [2, 'always'],
+    'react/jsx-curly-spacing': 0,
     'react/jsx-one-epxression-per-line': 0,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',

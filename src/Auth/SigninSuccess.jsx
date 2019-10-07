@@ -1,43 +1,36 @@
-import { Redirect } from '@reach/router';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from '@reach/router';
 import queryString from 'query-string';
 import { saveAccountToken } from './actions/authActions';
 
-class SigninSuccess extends Component {
-  componentDidMount() {
-    const query = queryString.parse(this.props.location.search);
-    if (query.token) {
-      this.props.saveAccountToken(query.token);
-    }
-  }
+function SigninSuccess(props) {
+  const { location } = props;
+  const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
 
-  render() {
-    const { auth } = this.props;
-    if (auth && auth.authenticated) {
-      return <Redirect to="/" noThrow />;
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    const query = queryString.parse(location.search);
+    if (query.token) {
+      saveAccountToken(dispatch, query.token);
     }
-    return null;
+  }, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
+
+  if (auth && auth.authenticated) {
+    return <Redirect to="/" noThrow />;
   }
+  return null;
 }
 
 SigninSuccess.propTypes = {
   location: PropTypes.object,
-  saveAccountToken: PropTypes.func.isRequired,
-  auth: PropTypes.object,
 };
 
 SigninSuccess.defaultProps = {
   location: undefined,
-  auth: undefined,
 };
 
-function mapStateToProps(state) {
-  return { auth: state.auth };
-}
-
-export default connect(
-  mapStateToProps,
-  { saveAccountToken },
-)(SigninSuccess);
+export default SigninSuccess;
