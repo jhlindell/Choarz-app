@@ -1,0 +1,2 @@
+export const AUTH_ACCOUNT = 'AUTH_ACCOUNT';
+export const UNAUTH_ACCOUNT = 'UNAUTH_ACCOUNT';

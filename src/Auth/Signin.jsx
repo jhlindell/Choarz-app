@@ -1,8 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-// import { Link } from '@reach/router';
+import Button from '@material-ui/core/Button';
 import React from 'react';
-import GoogleLogin from 'react-google-login';
 
 const useStyles = makeStyles({
   container: {
@@ -23,12 +22,8 @@ const useStyles = makeStyles({
   },
 });
 
-const responseGoogle = response => {
-  console.log(response);
-};
-
-const onFailure = error => {
-  console.log(error);
+const onClick = () => {
+  window.open('http://localhost:8000/auth/google', '_self');
 };
 
 export default function Signin() {
@@ -39,17 +34,8 @@ export default function Signin() {
       <h3>Please sign in using one of the following options:</h3>
       <Card className={classes.card}>
         <div>
-          <GoogleLogin
-            clientId={process.env.GOOGLE_CLIENT_ID}
-            buttonText="Login"
-            onSuccess={responseGoogle}
-            onFailure={onFailure}
-            cookiePolicy="single_host_origin"
-          />
+          <Button onClick={onClick}>Login with google</Button>
         </div>
-        {/* <div>
-          <Link to="/signup">Signup</Link>
-        </div> */}
       </Card>
     </div>
   );

@@ -1,16 +1,8 @@
 import { combineReducers } from 'redux';
-
-function account(state = [], action) {
-  switch (action.type) {
-    case 'GET_ACCOUNT':
-      return action.payload;
-    default:
-      return state;
-  }
-}
+import auth from '../Auth/reducers/authReducer';
 
 const appReducer = combineReducers({
-  account,
+  auth,
 });
 
 export default appReducer;
