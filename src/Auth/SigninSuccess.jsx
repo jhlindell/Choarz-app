@@ -14,7 +14,7 @@ function SigninSuccess(props) {
   useEffect(() => {
     const query = queryString.parse(location.search);
     if (query.token) {
-      saveAccountToken(dispatch, query.token);
+      dispatch(saveAccountToken(query.token));
     }
   }, []);
   /* eslint-enable react-hooks/exhaustive-deps */

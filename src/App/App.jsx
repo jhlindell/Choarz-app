@@ -6,6 +6,7 @@ import Home from '../Home/Home';
 import Signin from '../Auth/Signin';
 import Signup from '../Auth/Signup';
 import SigninSuccess from '../Auth/SigninSuccess';
+import Messages from '../Messages/MessageContainer';
 
 const useStyles = makeStyles({
   root: {
@@ -20,6 +21,7 @@ function App() {
   return (
     <div className={classes.root}>
       <NavBar />
+      <Messages />
       <Router>
         <Home path="/" />
         <Signin path="/signin" />

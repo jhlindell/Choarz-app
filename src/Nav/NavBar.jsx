@@ -32,7 +32,7 @@ function NavBarDisplay() {
   const classes = useStyles();
 
   function signOut() {
-    clearAccountToken(dispatch);
+    dispatch(clearAccountToken());
     navigate('/');
   }
 
@@ -40,11 +40,7 @@ function NavBarDisplay() {
     if (auth && auth.authenticated) {
       return (
         <div>
-          <Button
-            onClick={signOut}
-            variant="contained"
-            color="default"
-          >
+          <Button onClick={signOut} variant="contained" color="default">
             Sign Out
           </Button>
         </div>
