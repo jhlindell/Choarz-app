@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Router } from '@reach/router';
-import NavBar from '../Nav/NavBar';
+import NavBar from '../NavBar/NavBar';
 import Home from '../Home/Home';
 import Signin from '../Auth/Signin';
 import Signup from '../Auth/Signup';

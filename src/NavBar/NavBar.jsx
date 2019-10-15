@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link, navigate } from '@reach/router';
 import { clearAccountToken } from '../Auth/actions/authActions';
+import getAccountName from './actions/navbarActions';
 
 const useStyles = makeStyles({
   root: {
@@ -24,12 +25,28 @@ const useStyles = makeStyles({
     textDecoration: 'none',
     color: 'black',
   },
+  accountname: {
+    fontSize: 20,
+    marginRight: 10,
+  },
+  accountContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
 });
 
 function NavBarDisplay() {
   const auth = useSelector(state => state.auth);
+  const nav = useSelector(state => state.nav);
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  useEffect(() => {
+    if (auth.authenticated && !nav) {
+      dispatch(getAccountName());
+    }
+  }, [auth, dispatch, nav]);
 
   function signOut() {
     dispatch(clearAccountToken());
@@ -38,8 +55,13 @@ function NavBarDisplay() {
 
   function renderLinks() {
     if (auth && auth.authenticated) {
+      let accountname = null;
+      if (nav && nav.accountname) {
+        accountname = nav.accountname;
+      }
       return (
-        <div>
+        <div className={classes.accountContainer}>
+          <span className={classes.accountname}>{accountname}</span>
           <Button onClick={signOut} variant="contained" color="default">
             Sign Out
           </Button>
