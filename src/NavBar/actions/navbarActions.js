@@ -3,9 +3,10 @@ import { addMessage } from '../../Messages/actions/messageActions';
 import * as variants from '../../Messages/constants/messageVariants';
 import * as types from '../constants/navbarConstants';
 
-const URL = 'http://localhost:8000';
+const URL = process.env.SERVER_URL;
 
 export default function getAccountName() {
+  console.log('URL: ', URL);
   return function(dispatch, getState) {
     const { auth } = getState();
     axios
