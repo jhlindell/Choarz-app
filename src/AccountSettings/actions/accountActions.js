@@ -4,15 +4,15 @@ import * as variants from '../../Messages/constants/messageVariants';
 import * as types from '../constants/accountTypes';
 
 const URL = process.env.SERVER_URL;
-const loadAccountBegin = () => ({ type: types.LOAD_ACCOUNT_BEGIN });
-const loadAccountSuccess = data => ({
+export const loadAccountBegin = () => ({ type: types.LOAD_ACCOUNT_BEGIN });
+export const loadAccountSuccess = data => ({
   type: types.LOAD_ACCOUNT_SUCCESS,
   account: data,
 });
-const loadAccountFailure = () => ({ type: types.LOAD_ACCOUNT_FAILURE });
-const editAcountBegin = () => ({ type: types.EDIT_ACCOUNT_BEGIN });
-const editAcountSuccess = () => ({ type: types.EDIT_ACCOUNT_SUCCESS });
-const editAcountFailure = () => ({ type: types.EDIT_ACCOUNT_FAILURE });
+export const loadAccountFailure = () => ({ type: types.LOAD_ACCOUNT_FAILURE });
+export const editAccountBegin = () => ({ type: types.EDIT_ACCOUNT_BEGIN });
+export const editAccountSuccess = () => ({ type: types.EDIT_ACCOUNT_SUCCESS });
+export const editAccountFailure = () => ({ type: types.EDIT_ACCOUNT_FAILURE });
 
 export function getAccount() {
   return function(dispatch, getState) {
@@ -34,16 +34,16 @@ export function getAccount() {
 export function editAccount(account) {
   return function(dispatch, getState) {
     const { auth } = getState();
-    dispatch(editAcountBegin());
+    dispatch(editAccountBegin());
     axios
       .put(`${URL}/account`, account, {
         headers: { authorization: auth.token },
       })
-      .then(() => dispatch(editAcountSuccess()))
+      .then(() => dispatch(editAccountSuccess()))
       .catch(error => {
         const err = error.toString();
         dispatch(addMessage(err, variants.ERROR));
-        dispatch(editAcountFailure());
+        dispatch(editAccountFailure());
       });
   };
 }

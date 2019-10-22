@@ -1,6 +1,6 @@
 import * as types from '../constants/authConstants';
 
-export default function authReducer(state = {}, action) {
+export default function authReducer(state = null, action) {
   switch (action.type) {
     case types.AUTH_ACCOUNT:
       localStorage.setItem('accountToken', action.payload);

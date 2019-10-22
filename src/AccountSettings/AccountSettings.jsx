@@ -31,7 +31,6 @@ const useStyles = makeStyles({
 });
 
 function validateAccount(account) {
-  console.log('validating');
   let isValid = true;
   const errors = {
     email: undefined,
@@ -51,7 +50,6 @@ function validateAccount(account) {
     isValid = false;
   }
   if (!isValid) {
-    console.log('errors: ', errors);
     return errors;
   }
   return null;
@@ -88,7 +86,7 @@ function AccountSettings(props) {
   }
   return (
     <div>
-      {account && !account.isLoading ? (
+      {!account.isLoading && account.current ? (
         <div className={classes.formContainer}>
           <Card className={classes.card}>
             <CardHeader

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Router } from '@reach/router';
 import AccountSettings from '../AccountSettings/AccountSettingsContainer';
 import Home from '../Home/Home';
-import Messages from '../Messages/MessageContainer';
+import Messages from '../Messages/Messages';
 import NavBar from '../NavBar/NavBar';
 import Signin from '../Auth/Signin';
 import Signup from '../Auth/Signup';

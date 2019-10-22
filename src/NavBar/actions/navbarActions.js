@@ -6,7 +6,6 @@ import * as types from '../constants/navbarConstants';
 const URL = process.env.SERVER_URL;
 
 export default function getAccountName() {
-  console.log('URL: ', URL);
   return function(dispatch, getState) {
     const { auth } = getState();
     axios

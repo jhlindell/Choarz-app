@@ -1,6 +1,6 @@
 export default {
   isLoading: false,
-  current: {},
+  current: undefined,
   isDirty: false,
   errors: {},
 };
