@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import { Link, navigate } from '@reach/router';
 import { clearAccountToken } from '../Auth/actions/authActions';
 import getAccountName from './actions/navbarActions';
@@ -41,6 +43,7 @@ function NavBarDisplay() {
   const nav = useSelector(state => state.nav);
   const dispatch = useDispatch();
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   useEffect(() => {
     if (auth.authenticated && !nav) {
@@ -48,10 +51,24 @@ function NavBarDisplay() {
     }
   }, [auth, dispatch, nav]);
 
-  function signOut() {
+  const signOut = () => {
     dispatch(clearAccountToken());
     navigate('/');
-  }
+  };
+
+  const handleMenuClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const handleAccountClick = () => {
+    console.log('account settings clicked');
+    setAnchorEl(null);
+    navigate('/accountsettings');
+  };
 
   function renderLinks() {
     if (auth && auth.authenticated) {
@@ -88,9 +105,19 @@ function NavBarDisplay() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={handleMenuClick}
           >
             <MenuIcon />
           </IconButton>
+          <Menu
+            id="menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleCloseMenu}
+          >
+            <MenuItem onClick={handleAccountClick}>Account Settings</MenuItem>
+          </Menu>
           <Typography variant="h6" className={classes.title}>
             Choarz!
           </Typography>

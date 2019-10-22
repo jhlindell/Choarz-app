@@ -1,12 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Router } from '@reach/router';
-import NavBar from '../NavBar/NavBar';
+import AccountSettings from '../AccountSettings/AccountSettingsContainer';
 import Home from '../Home/Home';
+import Messages from '../Messages/MessageContainer';
+import NavBar from '../NavBar/NavBar';
 import Signin from '../Auth/Signin';
 import Signup from '../Auth/Signup';
 import SigninSuccess from '../Auth/SigninSuccess';
-import Messages from '../Messages/MessageContainer';
 
 const useStyles = makeStyles({
   root: {
@@ -24,6 +25,7 @@ function App() {
       <Messages />
       <Router>
         <Home path="/" />
+        <AccountSettings path="/accountsettings" />
         <Signin path="/signin" />
         <Signup path="/signup" />
         <SigninSuccess path="/signinsuccess" />
