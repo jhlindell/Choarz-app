@@ -65,7 +65,6 @@ function NavBarDisplay() {
   };
 
   const handleAccountClick = () => {
-    console.log('account settings clicked');
     setAnchorEl(null);
     navigate('/accountsettings');
   };
