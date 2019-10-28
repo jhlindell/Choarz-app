@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   getAccount,
   accountOnChange,
@@ -9,37 +11,55 @@ import {
 } from './actions/accountActions';
 import AccountSettings from './AccountSettings';
 
-export default function AccountSettingsContainer() {
-  const dispatch = useDispatch();
-  const account = useSelector(state => state.account);
-
-  function onChange(value) {
-    dispatch(accountOnChange(value));
+class AccountSettingsContainer extends React.Component {
+  componentDidMount() {
+    this.props.getAccount();
   }
 
-  function onSubmit(value) {
-    dispatch(editAccount(value));
+  render() {
+    return (
+      <AccountSettings
+        account={this.props.account}
+        onChange={this.props.accountOnChange}
+        editAccount={this.props.editAccount}
+        accountValidationError={this.props.accountValidationError}
+        clearAccount={this.props.clearAccount}
+      />
+    );
   }
+}
 
-  function validationError(value) {
-    dispatch(accountValidationError(value));
-  }
+AccountSettingsContainer.propTypes = {
+  account: PropTypes.object,
+  accountOnChange: PropTypes.func.isRequired,
+  editAccount: PropTypes.func.isRequired,
+  accountValidationError: PropTypes.func.isRequired,
+  clearAccount: PropTypes.func.isRequired,
+  getAccount: PropTypes.func.isRequired,
+};
 
-  function clear() {
-    dispatch(clearAccount());
-  }
+AccountSettingsContainer.defaultProps = {
+  account: undefined,
+};
 
-  useEffect(() => {
-    dispatch(getAccount());
-  }, [dispatch]);
+function mapState(state) {
+  return { account: state.account };
+}
 
-  return (
-    <AccountSettings
-      account={account}
-      onChange={onChange}
-      editAccount={onSubmit}
-      accountValidationError={validationError}
-      clearAccount={clear}
-    />
+function mapDispatch(dispatch) {
+  return bindActionCreators(
+    {
+      accountOnChange,
+      editAccount,
+      accountValidationError,
+      clearAccount,
+      getAccount,
+    },
+    dispatch,
   );
 }
+
+export default connect(
+  mapState,
+  mapDispatch,
+)(AccountSettingsContainer);
